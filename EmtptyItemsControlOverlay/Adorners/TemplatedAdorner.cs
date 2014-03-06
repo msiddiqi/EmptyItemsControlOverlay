@@ -13,7 +13,6 @@
 
         public TemplatedAdorner(
                 UIElement adornedElement, 
-                AdornerLayer adornerLayer, 
                 DataTemplate contentDataTemplate, object content) : base(adornedElement)
         {
             this.ContentPresenter = 
@@ -21,6 +20,9 @@
                             ContentTemplate = contentDataTemplate, 
                             Content = content, 
                             DataContext = content };
+
+            var adornerLayer = AdornerLayer.GetAdornerLayer(this.AdornedElement);
+            adornerLayer.Add(this);
         }
 
         #endregion Constructors

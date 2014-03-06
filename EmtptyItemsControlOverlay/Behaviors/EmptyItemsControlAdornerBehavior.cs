@@ -17,10 +17,7 @@
             base.OnAttached();
 
             AdornedElement = this.AssociatedObject;
-            this.ItemsControlAdorner = new TemplatedAdorner(AdornedElement, AdornerLayer.GetAdornerLayer(AdornedElement), this.DataTemplate, this.Data);
-
-            var adornerLayer = AdornerLayer.GetAdornerLayer(this.AdornedElement);
-            adornerLayer.Add(this.ItemsControlAdorner);
+            this.ItemsControlAdorner = new TemplatedAdorner(AdornedElement, this.DataTemplate, this.Data);
 
             var collectionViewSource = CollectionViewSource.GetDefaultView(this.AdornedElement.Items);
             if (collectionViewSource != null)
