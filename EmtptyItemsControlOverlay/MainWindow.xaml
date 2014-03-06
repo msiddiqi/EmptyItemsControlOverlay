@@ -1,0 +1,42 @@
+﻿<Window x:Class="EmtptyItemsControlOverlay.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:Behaviors="clr-namespace:EmtptyItemsControlOverlay.Behaviors"
+        xmlns:ViewModels="clr-namespace:EmtptyItemsControlOverlay.ViewModels"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <ViewModels:MainViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+            <AdornerDecorator>
+                <ListBox ItemsSource="{Binding Students}" >
+                    <ListBox.Resources>
+                        <DataTemplate x:Key="EmptyItemsControlAdorner">
+                            <Grid Background="GreenYellow" Opacity="0.4">
+                                <TextBlock Text="{Binding EmptyText}" Grid.Row="0" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.Resources>
+                    <Interactivity:Interaction.Behaviors>
+                        <Behaviors:EmptyItemsControlAdornerBehavior 
+                                        DataTemplate="{StaticResource EmptyItemsControlAdorner}" 
+                                        Data="{Binding}"  />
+                    </Interactivity:Interaction.Behaviors>
+                </ListBox>
+            </AdornerDecorator>
+        </Border>
+        <Button Grid.Row="1" Content="Remove" Click="Button_Click" Grid.Column="0"></Button>
+        <Button Grid.Row="1" Content="Add" Click="Button2_Click" Grid.Column="1"></Button>
+    </Grid>
+</Window>
